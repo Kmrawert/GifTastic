@@ -1,0 +1,21 @@
+body {
+    font-family: 'Fascinate', cursive;}
+
+#title {
+    font-family: 'Fascinate', cursive;
+    font-size: 300%;
+    margin: 20px;
+    text-align: center;
+}
+
+#buttons {
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    margin: 20px;
+}
+
+#search {
+    font-family: 'Fascinate', cursive;
+    margin: 20px;
+    display: inline-block;
+}
