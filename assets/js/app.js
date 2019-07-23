@@ -16,22 +16,22 @@ console.log(gifs);
     .then(function(response) {
         console.log(queryURL);
         console.log(response);
+
         
         var results = response.data;
 
         for (var i = 0; i < results.length; i++) {
             if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
-            
-                var gifDiv = $("<div>");
+            var gifDiv = $("<div>");
             var p = $("<p>").text("Rating: " + results[i].rating);
             var gifImage = $("<img>");
-                //animated
+                
+            //animated
             gifImage.attr("data-animate", results[i].images.fixed_height.url)
-    
-                //static
-            gifImage.attr("src", results[i].images['480w_still'].url);
-            
-            gifImage.attr("data-still", results[i].images['480w_still'].url);
+            //setting as source, or beginning image
+            gifImage.attr("src", results[i].images.fixed_height_still.url);
+            //static
+            gifImage.attr("data-still", results[i].images.fixed_height_still.url);
 
             gifImage.attr("data-state", "animate");
             gifImage.attr("data-state", "still");
@@ -82,7 +82,6 @@ function newButtons () {
 function search () {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById('myInput');
-  
       
         // Loop through all list items, and hide those who don't match the search query
         for (i = 0; i < li.length; i++) {
