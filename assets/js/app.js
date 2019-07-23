@@ -20,28 +20,60 @@ console.log(gifs);
         var results = response.data;
 
         for (var i = 0; i < results.length; i++) {
-
-            var gifDiv = $("<div>");
-
+            if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+            
+                var gifDiv = $("<div>");
             var p = $("<p>").text("Rating: " + results[i].rating);
-
             var gifImage = $("<img>");
-
+                //animated
+            gifImage.attr("data-animate", results[i].images.fixed_height.url)
+    
+                //static
             gifImage.attr("src", results[i].images['480w_still'].url);
+            
+            gifImage.attr("data-still", results[i].images['480w_still'].url);
+
+            gifImage.attr("data-state", "animate");
+            gifImage.attr("data-state", "still");
+
+            gifImage.attr("class","gifState")
 
             gifDiv.append(p);
             gifDiv.append(gifImage);
-
-            $("#gifsHere").prepend(gifDiv);
-
-            
+             $("#gifsHere").prepend(gifDiv);
 
           }
-
-
-
-       });
+     }
+     $(".gifState").on("click", function(){
+        var state = $(this).attr("data-state");
+   
+       if (state === "still") {
+           $(this).attr("src", $(this).attr("data-animate"));
+           $(this).attr("data-state", "animate");
+       } else {
+           $(this).attr("src", $(this).attr("data-still"));
+           $(this).attr("data-state", "still");
+       }
+   });
+    });
 });
+
+//gifImage.attr("src", results[i].images.fixed_height.url);
+
+$("#gifImage").on("click", function() {
+    // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+    var state = $(this).attr("data-state");
+    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+    // Then, set the image's data-state to animate
+    // Else set src to the data-still value
+    if (state === "still") {
+      $(this).attr("src", $(this).attr("data-animate"));
+      $(this).attr("data-state", "animate");
+    } else {
+      $(this).attr("src", $(this).attr("data-still"));
+      $(this).attr("data-state", "still");
+    }
+  });
 
 function newButtons () {
 
@@ -50,9 +82,7 @@ function newButtons () {
 function search () {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById('myInput');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByTagName('li');
+  
       
         // Loop through all list items, and hide those who don't match the search query
         for (i = 0; i < li.length; i++) {
