@@ -6,6 +6,7 @@ $("button").on("click", function() {
 
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
       gifs + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
+console.log(gifs);
 
     $.ajax({
       url: queryURL,
@@ -26,7 +27,7 @@ $("button").on("click", function() {
 
             var gifImage = $("<img>");
 
-            gifImage.attr("src", results[i].images.fixed_height.url);
+            gifImage.attr("src", results[i].images['480w_still'].url);
 
             gifDiv.append(p);
             gifDiv.append(gifImage);
@@ -47,8 +48,27 @@ function newButtons () {
 };
 
 function search () {
-
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName('li');
+      
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < li.length; i++) {
+          a = li[i].getElementsByTagName("a")[0];
+          txtValue = a.textContent || a.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+          } else {
+            li[i].style.display = "none";
+          }
+        }
 };
+$("#search").on("click", function searchButton() {
+console.log("anything");
+
+});
 
 function reset () {
 
