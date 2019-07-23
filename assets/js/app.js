@@ -25,7 +25,7 @@ console.log(gifs);
             var gifDiv = $("<div>");
             var p = $("<p>").text("Rating: " + results[i].rating);
             var gifImage = $("<img>");
-                
+
             //animated
             gifImage.attr("data-animate", results[i].images.fixed_height.url)
             //setting as source, or beginning image
